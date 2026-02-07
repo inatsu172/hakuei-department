@@ -5,12 +5,12 @@
   <title>白栄デパート | フロア案内</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
- /* ===========================
-   全体の背景（liminal × aero）
+/* ===========================
+   全体：青白い蛍光灯の liminal 空間
 =========================== */
 body {
   font-family: "Yu Gothic", "Hiragino Kaku Gothic ProN", system-ui, sans-serif;
-  background: linear-gradient(to bottom, #dfe7ef 0%, #eef3f7 40%, #f8fafc 100%);
+  background: radial-gradient(circle at 50% 0%, #d0e4f7 0%, #c8d8e8 20%, #bfcbdc 40%, #b7c0d0 60%, #aeb6c5 100%);
   color: #222;
   line-height: 1.8;
   letter-spacing: 0.02em;
@@ -18,30 +18,30 @@ body {
   overflow-x: hidden;
 }
 
-/* ノイズ（liminal感） */
+/* liminal ノイズ（強め） */
 body::before {
   content: "";
   position: fixed;
   inset: 0;
   pointer-events: none;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.06'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.55' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.12'/%3E%3C/svg%3E");
   mix-blend-mode: soft-light;
   z-index: 999;
 }
 
 /* ===========================
-   ヘッダー（ガラスUI）
+   ヘッダー：蛍光灯の反射 × ガラス
 =========================== */
 header {
-  background: rgba(255,255,255,0.65);
-  backdrop-filter: blur(10px);
+  background: rgba(240, 245, 255, 0.55);
+  backdrop-filter: blur(14px);
   border-bottom: 1px solid rgba(255,255,255,0.7);
-  padding: 24px 24px 18px;
+  padding: 26px 24px 20px;
   text-align: center;
   position: sticky;
   top: 0;
   z-index: 10;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.08);
 }
 
 header h1 {
@@ -54,114 +54,120 @@ header h1 {
 
 header p {
   font-size: 0.9rem;
-  color: #444;
+  color: #3a3a3a;
 }
 
 /* ===========================
-   メインコンテナ（ガラスパネル）
+   メイン：青白いガラスパネル
 =========================== */
 main {
   max-width: 960px;
-  margin: 40px auto;
+  margin: 50px auto;
   padding: 0 20px 60px;
-  background: rgba(255,255,255,0.55);
-  border: 1px solid rgba(255,255,255,0.7);
-  border-radius: 20px;
-  backdrop-filter: blur(14px);
-  box-shadow: 0 0 50px rgba(0,0,0,0.08);
+  background: rgba(245, 250, 255, 0.45);
+  border: 1px solid rgba(255,255,255,0.6);
+  border-radius: 22px;
+  backdrop-filter: blur(18px);
+  box-shadow:
+    0 0 60px rgba(180, 200, 220, 0.4),
+    inset 0 0 40px rgba(255,255,255,0.4);
 }
 
 /* ===========================
-   ナビ（ガラスUI）
+   ナビ：青ガラスの光
 =========================== */
 nav {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
-  padding: 20px 0 10px;
+  gap: 12px;
+  padding: 24px 0 14px;
 }
 
 nav a {
   text-decoration: none;
-  color: #333;
-  padding: 8px 16px;
+  color: #1e2a35;
+  padding: 10px 18px;
   border-radius: 14px;
   border: 1px solid rgba(255,255,255,0.8);
-  background: rgba(255,255,255,0.45);
-  backdrop-filter: blur(6px);
+  background: rgba(255,255,255,0.35);
+  backdrop-filter: blur(8px);
   transition: 0.25s;
   font-size: 0.9rem;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
 }
 
 nav a:hover {
-  background: rgba(200,230,255,0.7);
+  background: rgba(180,210,255,0.7);
   border-color: rgba(255,255,255,1);
   transform: translateY(-2px);
 }
 
 /* ===========================
-   セクション
+   セクション：蛍光灯の下のパネル
 =========================== */
 section {
-  padding: 36px 16px 28px;
-  border-bottom: 1px dashed rgba(150,150,150,0.25);
+  padding: 40px 16px 32px;
+  border-bottom: 1px dashed rgba(120,120,120,0.25);
 }
 
 h2 {
   font-size: 1.4rem;
   letter-spacing: 0.15em;
-  margin-bottom: 8px;
+  margin-bottom: 10px;
+  color: #1f2a38;
 }
 
 .sub {
   font-size: 0.85rem;
-  color: #666;
-  margin-bottom: 14px;
+  color: #5a6a7a;
+  margin-bottom: 16px;
 }
 
 /* ===========================
-   フロアリスト
+   フロアリスト：青白い案内板
 =========================== */
 .floor-list {
   list-style: none;
   padding: 0;
-  margin-top: 10px;
+  margin-top: 12px;
 }
 
 .floor-list li {
   display: flex;
   justify-content: space-between;
-  padding: 10px 4px;
+  padding: 12px 4px;
   border-bottom: 1px solid rgba(200,200,200,0.4);
+  color: #2a3a4a;
 }
 
 .floor-label {
   font-weight: bold;
   letter-spacing: 0.1em;
-  color: #333;
 }
 
 .floor-desc {
-  color: #555;
+  color: #3a4a5a;
   text-align: right;
 }
 
 /* ===========================
-   画像プレースホルダ（liminal）
+   画像プレースホルダ：liminal hallway
 =========================== */
 .image-placeholder {
-  margin-top: 18px;
-  padding: 28px;
-  border-radius: 14px;
+  margin-top: 20px;
+  padding: 32px;
+  border-radius: 16px;
   border: 1px solid rgba(255,255,255,0.7);
-  background: linear-gradient(135deg, #f3f6fa, #e9eef3);
-  color: #777;
+  background: linear-gradient(135deg, #e6eef7, #d5e0ec);
+  color: #6a7a8a;
   font-size: 0.9rem;
   text-align: center;
   letter-spacing: 0.12em;
-  opacity: 0.9;
-  backdrop-filter: blur(6px);
-  box-shadow: inset 0 0 20px rgba(255,255,255,0.4);
+  opacity: 0.95;
+  backdrop-filter: blur(8px);
+  box-shadow:
+    inset 0 0 30px rgba(255,255,255,0.5),
+    0 0 40px rgba(180,200,220,0.4);
 }
 
 /* ===========================
@@ -169,23 +175,23 @@ h2 {
 =========================== */
 .note {
   font-size: 0.8rem;
-  color: #777;
-  margin-top: 10px;
+  color: #6a6a6a;
+  margin-top: 12px;
 }
 
 .warning {
   font-size: 0.85rem;
   color: #b14444;
-  margin-top: 8px;
+  margin-top: 10px;
 }
 
 /* ===========================
    隠しコード
 =========================== */
 .hidden-code {
-  margin-top: 16px;
+  margin-top: 18px;
   font-size: 0.9rem;
-  color: #99a;
+  color: #889;
   letter-spacing: 0.3em;
   opacity: 0.35;
   transition: opacity 0.4s;
@@ -201,9 +207,9 @@ h2 {
 footer {
   text-align: center;
   font-size: 0.75rem;
-  color: #888;
-  padding: 20px;
-  margin-top: 40px;
+  color: #777;
+  padding: 24px;
+  margin-top: 50px;
 }
 
   </style>
