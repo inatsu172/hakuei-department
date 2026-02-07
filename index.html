@@ -28,6 +28,12 @@ body::before {
   mix-blend-mode: multiply;
   z-index: 999;
 }
+.photo {
+  width: 100%;
+  border-radius: 4px;
+  opacity: 0.95;
+  filter: brightness(0.92) contrast(1.05);
+}
 
 /* ===========================
    ヘッダー：古いデパートの案内板風
@@ -163,6 +169,9 @@ h2 {
     inset 0 0 20px rgba(255,255,255,0.4),
     0 0 20px rgba(0,0,0,0.05);
 }
+<div class="image-placeholder">
+  <img src="images/rooftop.jpg" alt="屋上遊園地" class="photo">
+</div>
 
 /* ===========================
    注意書き
