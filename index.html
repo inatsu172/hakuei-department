@@ -6,138 +6,133 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
 /* ===========================
-   全体：青白い蛍光灯の liminal 空間
+   全体：昭和〜平成初期のデパートの空気
 =========================== */
 body {
   font-family: "Yu Gothic", "Hiragino Kaku Gothic ProN", system-ui, sans-serif;
-  background: radial-gradient(circle at 50% 0%, #d0e4f7 0%, #c8d8e8 20%, #bfcbdc 40%, #b7c0d0 60%, #aeb6c5 100%);
-  color: #222;
+  background: linear-gradient(to bottom, #e7e2d5 0%, #e3dfd4 40%, #ded9cc 100%);
+  color: #2a2a2a;
   line-height: 1.8;
   letter-spacing: 0.02em;
   position: relative;
   overflow-x: hidden;
 }
 
-/* liminal ノイズ（強め） */
+/* ノイズ（フィルム写真の粒子感） */
 body::before {
   content: "";
   position: fixed;
   inset: 0;
   pointer-events: none;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.55' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.12'/%3E%3C/svg%3E");
-  mix-blend-mode: soft-light;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.6' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.08'/%3E%3C/svg%3E");
+  mix-blend-mode: multiply;
   z-index: 999;
 }
 
 /* ===========================
-   ヘッダー：蛍光灯の反射 × ガラス
+   ヘッダー：古いデパートの案内板風
 =========================== */
 header {
-  background: rgba(240, 245, 255, 0.55);
-  backdrop-filter: blur(14px);
-  border-bottom: 1px solid rgba(255,255,255,0.7);
+  background: linear-gradient(to bottom, #f8f5ec, #f0ece2);
+  border-bottom: 1px solid #c8c3b6;
   padding: 26px 24px 20px;
   text-align: center;
   position: sticky;
   top: 0;
   z-index: 10;
-  box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+  box-shadow: 0 3px 8px rgba(0,0,0,0.08);
 }
 
 header h1 {
-  font-size: 2rem;
-  letter-spacing: 0.35em;
-  text-indent: 0.35em;
-  color: #1a1a1a;
+  font-size: 1.9rem;
+  letter-spacing: 0.25em;
+  text-indent: 0.25em;
+  color: #3a3a3a;
   margin-bottom: 6px;
 }
 
 header p {
-  font-size: 0.9rem;
-  color: #3a3a3a;
+  font-size: 0.85rem;
+  color: #5a5a5a;
 }
 
 /* ===========================
-   メイン：青白いガラスパネル
+   メイン：古い館内パネル風
 =========================== */
 main {
   max-width: 960px;
-  margin: 50px auto;
+  margin: 40px auto;
   padding: 0 20px 60px;
-  background: rgba(245, 250, 255, 0.45);
-  border: 1px solid rgba(255,255,255,0.6);
-  border-radius: 22px;
-  backdrop-filter: blur(18px);
+  background: #f7f4ec;
+  border: 1px solid #d8d3c7;
+  border-radius: 4px;
   box-shadow:
-    0 0 60px rgba(180, 200, 220, 0.4),
-    inset 0 0 40px rgba(255,255,255,0.4);
+    0 0 40px rgba(0,0,0,0.05),
+    inset 0 0 20px rgba(255,255,255,0.4);
 }
 
 /* ===========================
-   ナビ：青ガラスの光
+   ナビ：昭和の案内板カラー
 =========================== */
 nav {
   display: flex;
   flex-wrap: wrap;
-  gap: 12px;
-  padding: 24px 0 14px;
+  gap: 10px;
+  padding: 20px 0 10px;
 }
 
 nav a {
   text-decoration: none;
-  color: #1e2a35;
-  padding: 10px 18px;
-  border-radius: 14px;
-  border: 1px solid rgba(255,255,255,0.8);
-  background: rgba(255,255,255,0.35);
-  backdrop-filter: blur(8px);
+  color: #2f3a32;
+  padding: 8px 14px;
+  border-radius: 4px;
+  border: 1px solid #c8c3b6;
+  background: #f2eee4;
   transition: 0.25s;
   font-size: 0.9rem;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
 }
 
 nav a:hover {
-  background: rgba(180,210,255,0.7);
-  border-color: rgba(255,255,255,1);
-  transform: translateY(-2px);
+  background: #e0dccf;
+  border-color: #b8b3a6;
 }
 
 /* ===========================
-   セクション：蛍光灯の下のパネル
+   セクション
 =========================== */
 section {
-  padding: 40px 16px 32px;
-  border-bottom: 1px dashed rgba(120,120,120,0.25);
+  padding: 36px 16px 28px;
+  border-bottom: 1px dashed #c8c3b6;
 }
 
 h2 {
-  font-size: 1.4rem;
-  letter-spacing: 0.15em;
-  margin-bottom: 10px;
-  color: #1f2a38;
+  font-size: 1.3rem;
+  letter-spacing: 0.1em;
+  margin-bottom: 8px;
+  color: #3a3a3a;
 }
 
 .sub {
-  font-size: 0.85rem;
-  color: #5a6a7a;
-  margin-bottom: 16px;
+  font-size: 0.8rem;
+  color: #6a6a6a;
+  margin-bottom: 14px;
 }
 
 /* ===========================
-   フロアリスト：青白い案内板
+   フロアリスト：古い案内板の色味
 =========================== */
 .floor-list {
   list-style: none;
   padding: 0;
-  margin-top: 12px;
+  margin-top: 10px;
 }
 
 .floor-list li {
   display: flex;
   justify-content: space-between;
-  padding: 12px 4px;
-  border-bottom: 1px solid rgba(200,200,200,0.4);
-  color: #2a3a4a;
+  padding: 10px 4px;
+  border-bottom: 1px solid #d0cbc0;
+  color: #3a3a3a;
 }
 
 .floor-label {
@@ -146,28 +141,27 @@ h2 {
 }
 
 .floor-desc {
-  color: #3a4a5a;
+  color: #4a4a4a;
   text-align: right;
 }
 
 /* ===========================
-   画像プレースホルダ：liminal hallway
+   画像プレースホルダ：昭和の館内写真風
 =========================== */
 .image-placeholder {
-  margin-top: 20px;
-  padding: 32px;
-  border-radius: 16px;
-  border: 1px solid rgba(255,255,255,0.7);
-  background: linear-gradient(135deg, #e6eef7, #d5e0ec);
-  color: #6a7a8a;
+  margin-top: 18px;
+  padding: 28px;
+  border-radius: 4px;
+  border: 1px solid #d8d3c7;
+  background: linear-gradient(135deg, #f0ece2, #e7e2d5);
+  color: #6a6a6a;
   font-size: 0.9rem;
   text-align: center;
   letter-spacing: 0.12em;
   opacity: 0.95;
-  backdrop-filter: blur(8px);
   box-shadow:
-    inset 0 0 30px rgba(255,255,255,0.5),
-    0 0 40px rgba(180,200,220,0.4);
+    inset 0 0 20px rgba(255,255,255,0.4),
+    0 0 20px rgba(0,0,0,0.05);
 }
 
 /* ===========================
@@ -175,25 +169,25 @@ h2 {
 =========================== */
 .note {
   font-size: 0.8rem;
-  color: #6a6a6a;
-  margin-top: 12px;
+  color: #777;
+  margin-top: 10px;
 }
 
 .warning {
   font-size: 0.85rem;
   color: #b14444;
-  margin-top: 10px;
+  margin-top: 8px;
 }
 
 /* ===========================
    隠しコード
 =========================== */
 .hidden-code {
-  margin-top: 18px;
-  font-size: 0.9rem;
-  color: #889;
+  margin-top: 14px;
+  font-size: 0.85rem;
+  color: #999;
   letter-spacing: 0.3em;
-  opacity: 0.35;
+  opacity: 0.4;
   transition: opacity 0.4s;
 }
 
@@ -208,9 +202,10 @@ footer {
   text-align: center;
   font-size: 0.75rem;
   color: #777;
-  padding: 24px;
-  margin-top: 50px;
+  padding: 20px;
+  margin-top: 40px;
 }
+
 
   </style>
 </head>
