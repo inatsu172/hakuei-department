@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>白栄デパート | フロア案内</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: "Yu Gothic", "Hiragino Kaku Gothic ProN", system-ui, sans-serif;
+      background: #f3f3f3;
+      color: #222;
+      line-height: 1.7;
+    }
+    body::before {
+      /* うっすらノイズでリミナル感 */
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='noStitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.06'/%3E%3C/svg%3E");
+      mix-blend-mode: multiply;
+      z-index: 999;
+    }
+    header {
+      background: linear-gradient(to bottom, #ffffff, #f0f0f0);
+      border-bottom: 1px solid #ddd;
+      padding: 16px 24px;
+      text-align: center;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+    header h1 {
+      font-size: 1.6rem;
+      letter-spacing: 0.3em;
+      text-indent: 0.3em;
+    }
+    header p {
+      font-size: 0.8rem;
+      color: #666;
+      margin-top: 4px;
+    }
+    main {
+      max-width: 960px;
+      margin: 24px auto 40px;
+      padding: 0 16px 40px;
+      background: #ffffff;
+      border: 1px solid #e0e0e0;
+      box-shadow: 0 0 40px rgba(0,0,0,0.04);
+      position: relative;
+      overflow: hidden;
+    }
+    main::before {
+      /* 蛍光灯の光が反射しているような帯 */
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 10%;
+      right: 10%;
+      height: 40px;
+      background: linear-gradient(to bottom, rgba(255,255,255,0.9), rgba(255,255,255,0));
+      pointer-events: none;
+    }
+    nav {
+      border-bottom: 1px solid #eee;
+      padding: 12px 16px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      font-size: 0.9rem;
+    }
+    nav a {
+      text-decoration: none;
+      color: #444;
+      padding: 4px 10px;
+      border-radius: 999px;
+      border: 1px solid #ddd;
+      background: #fafafa;
+      transition: background 0.2s, color 0.2s, border-color 0.2s;
+    }
+    nav a:hover {
+      background: #e8e8e8;
+      border-color: #bbb;
+    }
+    section {
+      padding: 24px 16px 16px;
+      border-bottom: 1px dashed #eee;
+    }
+    section:last-of-type {
+      border-bottom: none;
+    }
+    h2 {
+      font-size: 1.2rem;
+      margin-bottom: 8px;
+      letter-spacing: 0.15em;
+      text-indent: 0.15em;
+    }
+    h3 {
+      font-size: 1rem;
+      margin: 16px 0 4px;
+    }
+    .sub {
+      font-size: 0.8rem;
+      color: #777;
+      margin-bottom: 12px;
+    }
+    .floor-list {
+      list-style: none;
+      margin-top: 8px;
+    }
+    .floor-list li {
+      padding: 6px 0;
+      border-bottom: 1px dotted #e0e0e0;
+      font-size: 0.95rem;
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+    }
+    .floor-label {
+      font-weight: bold;
+      letter-spacing: 0.08em;
+    }
+    .floor-desc {
+      color: #555;
+      text-align: right;
+      flex: 1;
+    }
+    .note {
+      font-size: 0.8rem;
+      color: #999;
+      margin-top: 8px;
+    }
+    .mono {
+      font-family: "SF Mono", "Consolas", "Menlo", monospace;
+      font-size: 0.85rem;
+    }
+    .image-placeholder {
+      margin-top: 12px;
+      padding: 18px;
+      border: 1px solid #e3e3e3;
+      background: linear-gradient(135deg, #f8f8f8, #f1f1f1);
+      color: #999;
+      font-size: 0.85rem;
+      text-align: center;
+      letter-spacing: 0.12em;
+    }
+    form {
+      margin-top: 12px;
+      font-size: 0.9rem;
+    }
+    label {
+      display: block;
+      margin-top: 8px;
+      margin-bottom: 2px;
+    }
+    input[type="text"],
+    input[type="email"],
+    textarea {
+      width: 100%;
+      padding: 6px 8px;
+      border: 1px solid #ccc;
+      border-radius: 2px;
+      font-family: inherit;
+      font-size: 0.9rem;
+      background: #fafafa;
+    }
+    textarea {
+      min-height: 80px;
+      resize: vertical;
+    }
+    input[type="submit"] {
+      margin-top: 10px;
+      padding: 6px 18px;
+      border-radius: 999px;
+      border: 1px solid #999;
+      background: #f5f5f5;
+      cursor: pointer;
+      font-size: 0.9rem;
+    }
+    input[type="submit"]:hover {
+      background: #e4e4e4;
+    }
+    footer {
+      text-align: center;
+      font-size: 0.75rem;
+      color: #999;
+      padding: 16px;
+    }
+    .glitch-time {
+      font-size: 0.8rem;
+      color: #aaa;
+      margin-top: 4px;
+    }
+    .hidden-code {
+      margin-top: 10px;
+      font-size: 0.8rem;
+      color: #bbb;
+      letter-spacing: 0.25em;
+    }
+    .hidden-code span {
+      opacity: 0.3;
+      transition: opacity 0.3s;
+    }
+    .hidden-code.revealed span {
+      opacity: 1;
+    }
+    .warning {
+      font-size: 0.85rem;
+      color: #b14444;
+      margin-top: 6px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>白栄デパート</h1>
+    <p>本日はご来店ありがとうございます。白栄デパートは皆様の「記憶」を大切に営業しております。</p>
+  </header>
+
+  <main>
+    <nav>
+      <a href="#about">お知らせ</a>
+      <a href="#floorguide">フロア案内</a>
+      <a href="#b2f">B2F 忘れ物センター</a>
+      <a href="#7f">7F お客様の声</a>
+      <a href="#roof">R階 屋上遊園地</a>
+      <a href="#contact">お問い合わせ</a>
+    </nav>
+
+    <section id="about">
+      <h2>営業のご案内</h2>
+      <p class="sub">白栄デパート公式サイト（簡易版）</p>
+      <p>
+        白栄デパートは、皆様の心に残る「懐かしさ」とともに、静かに営業を続けております。<br>
+        館内では、過去の思い出や、言葉にならない感覚をお楽しみください。
+      </p>
+      <p class="glitch-time">
+        最終更新日：<span class="mono" id="last-updated">2099-02-07 12:34</span>
+      </p>
+      <div class="image-placeholder">
+        無人のエスカレーターが、ゆっくりと動いている。
+      </div>
+      <p class="note">
+        ※一部フロアは現在、改装中または立入をご遠慮いただいております。
+      </p>
+    </section>
+
+    <section id="floorguide">
+      <h2>フロア案内</h2>
+      <p class="sub">Floor Guide</p>
+      <ul class="floor-list">
+        <li>
+          <span class="floor-label">B2F</span>
+          <span class="floor-desc">忘れ物センター（Lost &amp; Found）</span>
+        </li>
+        <li>
+          <span class="floor-label">B1F</span>
+          <span class="floor-desc">食品・生鮮売り場</span>
+        </li>
+        <li>
+          <span class="floor-label">1F</span>
+          <span class="floor-desc">化粧品・雑貨・インフォメーション</span>
+        </li>
+        <li>
+          <span class="floor-label">2F</span>
+          <span class="floor-desc">紳士服・ビジネス用品</span>
+        </li>
+        <li>
+          <span class="floor-label">3F</span>
+          <span class="floor-desc">婦人服・アクセサリー</span>
+        </li>
+        <li>
+          <span class="floor-label">4F</span>
+          <span class="floor-desc">生活用品・インテリア</span>
+        </li>
+        <li>
+          <span class="floor-label">5F</span>
+          <span class="floor-desc">玩具・子ども用品</span>
+        </li>
+        <li>
+          <span class="floor-label">6F</span>
+          <span class="floor-desc">レストラン街（営業時間外）</span>
+        </li>
+        <li>
+          <span class="floor-label">7F</span>
+          <span class="floor-desc">お客様の声フロア</span>
+        </li>
+        <li>
+          <span class="floor-label">R</span>
+          <span class="floor-desc">屋上遊園地（閉鎖中）</span>
+        </li>
+      </ul>
+      <p class="note">
+        ※一部フロアは、現在の建築図面には記載されておりません。
+      </p>
+    </section>
+
+    <section id="b2f">
+      <h2>B2F 忘れ物センター</h2>
+      <p class="sub">Lost &amp; Found</p>
+      <p>
+        お客様よりお預かりした「忘れ物」を保管しております。<br>
+        傘、手袋、帽子、買い物袋、そして――思い出。
+      </p>
+      <p class="warning">
+        該当するお心当たりがない場合でも、棚の奥を長時間見つめないでください。
+      </p>
+      <div class="image-placeholder">
+        蛍光灯の光だけが反射する、無人のカウンター。
+      </div>
+      <p class="note">
+        ※お引き取りの際は、身分証明書のほか、「いつの記憶か」をお伺いする場合がございます。
+      </p>
+    </section>
+
+    <section id="3f">
+      <h2>3F 婦人服売り場</h2>
+      <p class="sub">Ladies' Fashion</p>
+      <p>
+        本日はご来店ありがとうございます。<br>
+        試着室をご利用の際は、<strong>鏡に触れないよう</strong>お願いいたします。
+      </p>
+      <div class="image-placeholder">
+        カーテンの閉まった試着室が、いくつも並んでいる。
+      </div>
+      <p class="note">
+        ※鏡に映っている人数と、実際の人数が異なる場合がございます。
+      </p>
+    </section>
+
+    <section id="5f">
+      <h2>5F 玩具売り場</h2>
+      <p class="sub">Toys &amp; Childhood</p>
+      <p>
+        懐かしいおもちゃが勢揃い。<br>
+        なお、<strong>店内で聞こえる足音はスタッフのものではありません。</strong>
+      </p>
+      <div class="image-placeholder">
+        誰もいないのに、棚の影だけが少しずれている。
+      </div>
+      <p class="note">
+        ※一部の商品は、すでに製造されていない年代のものが含まれます。
+      </p>
+    </section>
+
+    <section id="7f">
+      <h2>7F お客様の声フロア</h2>
+      <p class="sub">Customer Lounge</p>
+      <p>
+        こちらのフロアでは、お客様から寄せられた声を展示しております。<br>
+        どうぞ、ごゆっくりおくつろぎください。
+      </p>
+      <div class="image-placeholder">
+        誰も座っていないソファと、消えかけた観葉植物。
+      </div>
+      <p class="note">
+        ※現在、館内放送の録音を再生しております。聞き覚えのある声が含まれる場合がございます。
+      </p>
+    </section>
+
+    <section id="roof">
+      <h2>R階 屋上遊園地</h2>
+      <p class="sub">Rooftop Amusement (Closed)</p>
+      <p>
+        屋上遊園地は現在、閉鎖中です。<br>
+        立入はご遠慮ください。
+      </p>
+      <div class="image-placeholder">
+        フェンス越しに、誰かの影だけが伸びている。
+      </div>
+      <p class="note">
+        ※最新の写真には、撮影時に現場にいなかった人物の影が写り込むことがあります。
+      </p>
+    </section>
+
+    <section id="contact">
+      <h2>お問い合わせ</h2>
+      <p class="sub">Contact Form</p>
+      <p>
+        白栄デパートへのお問い合わせは、以下のフォームよりお寄せください。<br>
+        いただいた内容は、順次「記憶」の棚に保管させていただきます。
+      </p>
+      <form id="contact-form">
+        <label for="name">お名前（任意）</label>
+        <input type="text" id="name" name="name">
+
+        <label for="email">メールアドレス（任意）</label>
+        <input type="email" id="email" name="email">
+
+        <label for="message">お問い合わせ内容</label>
+        <textarea id="message" name="message" required></textarea>
+
+        <input type="submit" value="送信する">
+      </form>
+      <p class="note">
+        ※送信後、自動返信メールをお送りいたします。<br>
+        ※返信文の末尾に記載される数字列は、フロア案内の階数を示しています。
+      </p>
+      <div class="hidden-code" id="hidden-code">
+        <span>3</span><span>-</span><span>5</span><span>-</span><span>5</span><span>-</span><span>7</span><span>-</span><span>R</span>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    &copy; 白栄デパート<br>
+    このサイトは一部のブラウザでは正しく表示されない場合がございます。
+  </footer>
+
+  <script>
+    // 未来の日付っぽく見せるための軽い演出
+    (function() {
+      var el = document.getElementById("last-updated");
+      if (!el) return;
+      var now = new Date();
+      // わざと数年先の年号にする
+      var futureYear = now.getFullYear() + 10;
+      var m = String(now.getMonth() + 1).padStart(2, "0");
+      var d = String(now.getDate()).padStart(2, "0");
+      var hh = String(now.getHours()).padStart(2, "0");
+      var mm = String(now.getMinutes()).padStart(2, "0");
+      el.textContent = futureYear + "-" + m + "-" + d + " " + hh + ":" + mm;
+    })();
+
+    // お問い合わせフォームのダミー送信処理
+    (function() {
+      var form = document.getElementById("contact-form");
+      var code = document.getElementById("hidden-code");
+      if (!form || !code) return;
+
+      form.addEventListener("submit", function(e) {
+        e.preventDefault();
+        alert("ご連絡ありがとうございます。\n自動返信メールを送信しました。\n\n---\n末尾の数字列： 3-5-5-7-R");
+        code.classList.add("revealed");
+      });
+    })();
+  </script>
+</body>
+</html>
